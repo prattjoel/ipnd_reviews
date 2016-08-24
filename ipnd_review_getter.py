@@ -12,11 +12,11 @@ CERTIFICATIONS_URL = 'https://review-api.udacity.com/api/v1/me/certifications.js
 # I'm having trouble getting through the authorization on the udacity reviews page.  
 # When I put the headers variable in my request I get an error (see below).  
 # But when when I remove them I get an 'unauthorized' error
-# headers = {'Authorization': TOKEN}
-# req = urllib2.Request(CERTIFICATIONS_URL, headers)
+headers = {'Authorization': TOKEN}
+req = urllib2.Request(CERTIFICATIONS_URL, headers)
 
-# response = urllib2.urlopen(req)
-# page_contents = response.read()
+response = urllib2.urlopen(req)
+page_contents = response.read()
 
 
 
@@ -24,7 +24,7 @@ CERTIFICATIONS_URL = 'https://review-api.udacity.com/api/v1/me/certifications.js
 
 def startReviewBot():
 	print TOKEN
-    # print page_contents
+    print page_contents
 
 
     
