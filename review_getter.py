@@ -11,6 +11,8 @@ CERTS_URL = 'https://review-api.udacity.com/api/v1/me/certifications.json'
 ASSIGN_URL = 'https://review-api.udacity.com/api/v1/projects/{pid}/submissions/assign.json'
 REVIEW_URL = 'https://review.udacity.com/#!/submissions/{sid}'
 REQUESTS_PER_SECOND = 1 # Please leave this alone.
+stop_polling = raw_input()
+# test_var = "stop"
 
 logging.basicConfig(format = '|%(asctime)s| %(message)s')
 logger = logging.getLogger(__name__)
@@ -44,6 +46,10 @@ def request_reviews(token):
         elif resp.status_code == 404:
             logger.debug("{} returned {}: No submissions available."
                 .format(resp.url, resp.status_code))
+            # if test_var == "stop":
+            #     break
+            if stop_polling == "stop":
+                break
             # print(resp.status_code)
         elif resp.status_code in [400, 422]:
             logger.debug("{} returned {}: Assigned submission limit reached."
@@ -52,6 +58,7 @@ def request_reviews(token):
 
         else:
             resp.raise_for_status()
+        
 
         time.sleep(1.0 / REQUESTS_PER_SECOND)
 
@@ -78,4 +85,8 @@ if __name__=="__main__":
         logger.setLevel(logging.DEBUG)
 
     request_reviews(args.token)
+    
+
+
+    
 
